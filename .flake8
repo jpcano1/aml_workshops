@@ -1,0 +1,51 @@
+[flake8]
+ignore =
+    # The following disabled rules are due to black's format
+    E203, # Whitespace before ':'
+    E501, # Line too long (82 > 79 characters)
+    W503, # Line break occurred before a binary operator
+    C812, # missing trailing comma
+    C815, # missing trailing comma in Python 3.5+
+    # Ignore all Bugbear errors related to Python 2 as they have false positives. see
+    # https://github.com/PyCQA/flake8-bugbear/issues/59
+    B301,
+    B302,
+    B303,
+    B304,
+    B305,
+    B306,
+    # The errors below must be addressed
+    A003, # class attribute "type" is shadowing a python builtin
+    C901, # 'InvoicingExecutor.get_new_invoicing_data' is too complex (35)
+    C416, # Unnecessary list comprehension - rewrite using list()'
+    F401, # '.app.app' imported but unused
+    F403, # 'from .apps import *' used; unable to detect undefined names
+    PT013, # Incorrect import of pytest, use simple 'import pytest' instead
+    D100, # Missing docstring
+    D101, # Missing docstring in public class
+    D102, # Missing docstring in public method
+    D103, # Missing docstring in public function
+    D104, # Missing docstring in public package
+    D105, # Missing docstring in magic method
+    D106, # Missing docstring in public nested class
+    D107, # Missing docstring in __init__
+    E402, # module level import not at top of file
+per-file-ignores =
+    # See https://stackoverflow.com/questions/43746413/how-do-i-get-flake8-to-work-with-f811-errors
+    ./tests/payments/integration/conftest.py:F811
+count = True
+exclude =
+    __pycache__
+    .git
+    .github
+    .mypy_cache
+    .pytest_cache
+    bin
+    lib
+max-line-length = 100
+disable_noqa = False
+show-source = True
+statistics = True
+max-complexity = 15
+inline-quotes = "
+show-statistics = True
