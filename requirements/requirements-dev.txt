@@ -1,0 +1,20 @@
+# Dev tools requirements
+bandit==1.7.0
+flake8==3.9.2
+flake8-builtins==1.5.3
+flake8-bugbear==20.1.4
+flake8-commas==2.0.0
+flake8-comprehensions==3.2.3
+flake8-quotes==3.2.0
+flake8-tidy-imports==4.1.0
+icecream==2.1.1
+isort==5.4.2
+mypy==0.901
+safety==1.10.3
+vulture==2.1
+jupytext~=1.6.0
+
+# Lab requirements
+jupyterlab
+ipywidgets
+matplotlib
