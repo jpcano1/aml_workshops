@@ -1,13 +1,48 @@
+# -*- coding: utf-8 -*-
+# ---
+# jupyter:
+#   jupytext:
+#     text_representation:
+#       extension: .py
+#       format_name: percent
+#       format_version: '1.3'
+#       jupytext_version: 1.6.0
+#   kernelspec:
+#     display_name: Python 3
+#     name: python3
+# ---
+
+# %% [markdown] id="rft1MP5eCPav"
+# # **Análisis con Machine Learning**
+# ## **Taller 1**
+# #### **Andrea Bayona - Juan Pablo Cano**
+#
+#
+# En la actualidad, el sector inmobiliario ruso está en pleno auge. Ofrece muchas oportunidades emocionantes y un alto rendimiento en cuanto a estilos de vida e inversiones. El mercado inmobiliario lleva varios años en fase de crecimiento, lo que significa que todavía se pueden encontrar propiedades a precios muy atractivos, pero es muy probable que aumenten en el futuro. Para poder entender el mercado, una inmobiliaria rusa le ha brindado la información de la venta de más de 45 mil inmuebles entre los años de 2018 y 2021. Y quieren entender cuáles son las características principales que inciden en los precios de venta, para poder proponer planes de construcción de inmuebles en las áreas urbanas disponibles, que tomen en cuenta estas características.
+
+# %% colab={"base_uri": "https://localhost:8080/", "height": 84, "referenced_widgets": ["da6849b758724420a2c2a3e7c5c3f505", "956516e1194f4450b9d4c8e5c1f0977a", "48ab59530903488cbd827bf59e4b1824", "c4c9cbb61af04b25a540245a2f04adee", "32c598436a2644beb22999785a1885ef", "6d19200d68f94a20a9abab52074ef614", "47130d4e4d9347f98ab9d59f2d6be920", "4bbc39fb5f2c470193afae3666ba5b54", "b7fd518dd7ee44d48d515bb647d56a3c", "48f2c85ad73a47108db1041f4edbe64d", "35a7c05519454f4db95f6e2911fae35e"]} executionInfo={"elapsed": 1665, "status": "ok", "timestamp": 1645572040968, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Tb2Jg3f9jx-S" outputId="54f1873e-3c67-40c8-a1e1-61adced934ff"
+# !shred -u setup_colab_general.py
+# !wget -q "https://github.com/jpcano1/python_utils/raw/main/setup_colab_general.py" -O setup_colab_general.py
 import setup_colab_general as setup_general
 
 setup_general.setup_general()
+
+# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 40618, "status": "ok", "timestamp": 1645572082384, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="yqAdW4WNlYXN" outputId="d8b7737c-aa12-450b-edac-c7915a3b1a02"
+# !pip install --disable-pip-version-check --progress-bar off -q https://github.com/pandas-profiling/pandas-profiling/archive/master.zip
+# !pip install --disable-pip-version-check --progress-bar off -q tabulate
+
+# %% [markdown] id="Am5V_Yb1ntVC"
+# ## **Importando la librerías necesarias**
+
 import os
 
 import matplotlib.pyplot as plt
+# %% executionInfo={"elapsed": 187, "status": "ok", "timestamp": 1645573796627, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="ebTvp-cCwAsQ"
 import numpy as np
 import pandas as pd
 
 plt.style.use("seaborn-deep")
+
 # Librerías extras
 import itertools
 from typing import Optional
@@ -31,6 +66,26 @@ data_url = (
     "201/russian_prices.csv"
 )
 gen.download_content(data_url, filename="russian_prices.csv")
+
+# %% [markdown] id="IuYNGV_wnxjN"
+# ## **Lectura y perfilamiento**
+#
+# ###**Diccionario de Datos**
+# La inmobiliaria ha construido el siguiente diccionario de datos:
+#
+# * date - Fecha de publicación del anuncio.
+# * time - Tiempo que la publicación estuvo activo.
+# * geo_lat - Latitud.
+# * geo_lon - Longitud.
+# * region - Region de Rusia. Hay 85 regiones en total.
+# * building_type - Tipo de Fachada. 0 - Other. 1 - Panel. 2 - Monolithic. 3 - * Brick. 4 - Blocky. 5 - Wooden.
+# * object_type - Tipo de Apartmento. 1 - Secondary real estate market; 2 - New * building.
+# * level - Piso del Apartamento.
+# * levels - Número de pisos.
+# * rooms - Número de Habitaciones. Si el valor es "-1", Significa que es un "studio apartment".
+# * area - Área total del apartamento (m2).
+# * kitchen_area - Área de la Cocina (m2).
+# * price - Precio. En rublos
 
 # %% [markdown] id="tvVbLTlBE6mh"
 # A continuación, se leen los datos y se revisan las primeras líneas para verficar que la carga fue exitosa
@@ -184,7 +239,6 @@ print(f"R2-score: {r2_poly:.7f}")
 print(f"Residual sum of squares (MSE): {mse_poly:.5f}")
 print(f"Mean absolute error: {mae_poly:.5f}")
 
-
 # %% [markdown] id="hWv4uZTyeZ1l"
 # #### **Comportamiento de los datos reales vs los datos predecidos**
 
@@ -309,6 +363,7 @@ lasso_coef
 # %% executionInfo={"elapsed": 152, "status": "ok", "timestamp": 1645574215952, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="yRCL86NIokX6"
 y_pred_3 = lasso_reg.predict(X_val)
 
+# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 161, "status": "ok", "timestamp": 1645574223887, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="htf4tAfFbPDT" outputId="bb3e0518-f9b6-4aab-ce08-9f72d15b83b0"
 r2_lasso = r2_score(y_val, y_pred_3)
 mse_lasso = mean_squared_error(y_val, y_pred_3)
 mae_lasso = mean_absolute_error(y_val, y_pred_3)
@@ -318,9 +373,17 @@ print(f"R2-score: {r2_lasso:.4f}")
 print(f"Residual sum of squares (MSE): {mse_lasso:.5f}")
 print(f"Mean absolute error: {mae_lasso:.5f}")
 
+# %% [markdown] id="VMbo3Ep9kWGZ"
+# #### **Comportamiento de los datos reales vs los datos predecidos**
 
+# %% colab={"base_uri": "https://localhost:8080/", "height": 729} executionInfo={"elapsed": 1457, "status": "ok", "timestamp": 1645574228893, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="xeorxVPNkeMg" outputId="d04ba059-9312-436d-fceb-e1332153ac8f"
+# %matplotlib inline
 draw_chart(y_val, y_pred_3, "Predicción con regresion Lasso", "Regresion Lasso")
 
+# %% [markdown] id="FCjiiBzKcbTY"
+# #### **Entrenamiento (Con estandarización)**
+
+# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 196, "status": "ok", "timestamp": 1645574236069, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Em51FsVrr62S" outputId="8f0f66fb-23f9-4b53-cdbb-83d36ea06607"
 pipeline = Pipeline(
     [
         ("scaler", StandardScaler()),
@@ -334,9 +397,13 @@ pipeline.fit(X_train, y_train)
 lasso_coef = dict(zip(X_train.columns, pipeline.steps[1][1].coef_))
 lasso_coef
 
+# %% [markdown] id="TYpXgaMxdv77"
+# #### **Validación**
 
+# %% executionInfo={"elapsed": 151, "status": "ok", "timestamp": 1645574240734, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="TguKWWZwdn9a"
 y_pred_3b = pipeline.predict(X_val)
 
+# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 5, "status": "ok", "timestamp": 1645574240966, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Bv_znLZ-dxlq" outputId="9bacafdc-4482-4970-eb04-636fc807af65"
 r2_lasso_s = r2_score(y_val, y_pred_3b)
 mse_lasso_s = mean_squared_error(y_val, y_pred_3b)
 mae_lasso_s = mean_absolute_error(y_val, y_pred_3b)
@@ -346,7 +413,11 @@ print(f"R2-score: {r2_lasso_s:.7f}")
 print(f"Residual sum of squares (MSE): {mse_lasso_s:.5f}")
 print(f"Mean absolute error: {mae_lasso_s:.5f}")
 
+# %% [markdown] id="rA8zBvMtkYIp"
+# #### **Comportamiento de los datos reales vs los datos predecidos**
 
+# %% colab={"base_uri": "https://localhost:8080/", "height": 729} executionInfo={"elapsed": 814, "status": "ok", "timestamp": 1645574245641, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="WvJeqiEAky85" outputId="a68a9b7e-13ad-4808-bb24-87c27e6f75c3"
+# %matplotlib inline
 draw_chart(
     y_val,
     y_pred_3b,
@@ -354,7 +425,11 @@ draw_chart(
     "Regresion Lasso",
 )
 
+# %% [markdown] id="8-9QFqjSlfFJ"
+# ### **Selección del mejor modelo**
+# Tabla comparativa con los resultados de las métricas R2, MSE y MAE para los 3 modelos entrenados.
 
+# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 183, "status": "ok", "timestamp": 1645574256112, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="lWomqAnlmJK7" outputId="5fe9ff87-c55a-4f6b-a48b-a6348aca22b1"
 info = {
     "Model": ["Poly Regression", "Ridge", "Ridge (con S)", "Lasso", "Lasso (con S)"],
     "R2": [r2_poly, r2_ridge, r2_ridge_s, r2_lasso, r2_lasso_s],
@@ -363,3 +438,8 @@ info = {
 }
 
 print(tabulate(info, headers="keys", tablefmt="fancy_grid"))
+
+# %% [markdown] id="ewVS7PkQd_1B"
+# ### **Optimización de hiperparámetros para el mejor modelo**
+
+# %% id="eWSPKRNod7fJ"
