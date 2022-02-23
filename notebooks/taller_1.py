@@ -34,10 +34,10 @@ setup_general.setup_general()
 # %% [markdown] id="Am5V_Yb1ntVC"
 # ## **Importando la librerías necesarias**
 
+# %% executionInfo={"elapsed": 187, "status": "ok", "timestamp": 1645573796627, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="ebTvp-cCwAsQ"
 import os
 
 import matplotlib.pyplot as plt
-# %% executionInfo={"elapsed": 187, "status": "ok", "timestamp": 1645573796627, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="ebTvp-cCwAsQ"
 import numpy as np
 import pandas as pd
 
@@ -70,7 +70,7 @@ gen.download_content(data_url, filename="russian_prices.csv")
 # %% [markdown] id="IuYNGV_wnxjN"
 # ## **Lectura y perfilamiento**
 #
-# ###**Diccionario de Datos**
+# ### **Diccionario de Datos**
 # La inmobiliaria ha construido el siguiente diccionario de datos:
 #
 # * date - Fecha de publicación del anuncio.
@@ -137,9 +137,7 @@ russian_prices_df = russian_prices_df.apply(lambda x: x.astype("int32"))
 russian_prices_df["object_type"] = russian_prices_df["object_type"].apply(
     lambda x: 2 if x == 11 else x
 )
-russian_prices_df["rooms"] = russian_prices_df["rooms"].apply(
-    lambda x: -1 if x == -2 else x
-)
+russian_prices_df["rooms"] = russian_prices_df["rooms"].apply(lambda x: -1 if x == -2 else x)
 
 # %% executionInfo={"elapsed": 192, "status": "ok", "timestamp": 1645574148264, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="dYivdCPnwfuo"
 rows_to_drop = russian_prices_df.query(
