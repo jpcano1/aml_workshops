@@ -8,6 +8,10 @@ __pycache__/
 
 .vscode/
 .idea/
+utils/
+setup_colab_general.py
+data/
+mlruns/
 
 # Distribution / packaging
 .Python
