@@ -5,7 +5,7 @@
 #     text_representation:
 #       extension: .py
 #       format_name: percent
-#       format_version: '1.3'
+#       format_version: "1.3"
 #       jupytext_version: 1.6.0
 #   kernelspec:
 #     display_name: Python 3
@@ -20,26 +20,23 @@
 #
 # En la actualidad, el sector inmobiliario ruso está en pleno auge. Ofrece muchas oportunidades emocionantes y un alto rendimiento en cuanto a estilos de vida e inversiones. El mercado inmobiliario lleva varios años en fase de crecimiento, lo que significa que todavía se pueden encontrar propiedades a precios muy atractivos, pero es muy probable que aumenten en el futuro. Para poder entender el mercado, una inmobiliaria rusa le ha brindado la información de la venta de más de 45 mil inmuebles entre los años de 2018 y 2021. Y quieren entender cuáles son las características principales que inciden en los precios de venta, para poder proponer planes de construcción de inmuebles en las áreas urbanas disponibles, que tomen en cuenta estas características.
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 84, "referenced_widgets": ["da6849b758724420a2c2a3e7c5c3f505", "956516e1194f4450b9d4c8e5c1f0977a", "48ab59530903488cbd827bf59e4b1824", "c4c9cbb61af04b25a540245a2f04adee", "32c598436a2644beb22999785a1885ef", "6d19200d68f94a20a9abab52074ef614", "47130d4e4d9347f98ab9d59f2d6be920", "4bbc39fb5f2c470193afae3666ba5b54", "b7fd518dd7ee44d48d515bb647d56a3c", "48f2c85ad73a47108db1041f4edbe64d", "35a7c05519454f4db95f6e2911fae35e"]} executionInfo={"elapsed": 1665, "status": "ok", "timestamp": 1645572040968, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Tb2Jg3f9jx-S" outputId="54f1873e-3c67-40c8-a1e1-61adced934ff"
+# %% colab={"base_uri": "https://localhost:8080/", "height": 67, "referenced_widgets": ["f36e5fc2011e4610ab7023be86219b84", "c415eeb92f7043e8b96a57a0b2f66de0", "573acf786cbc45c99c7929bf26ac3803", "0fbc465aa99244fb826cd8c2d708a2b0", "a5ce9451dee94807a0167712ab0ea83e", "787091749c8c4cc6b4e1e1abc81a99c9", "d520ac2d610c442fbd45003ad6c49e45", "1db1e8f04e58403eb3961e8e2a0d2848", "6fcd4db153e6466795b5d7d9ca9fed0c", "817bda5a33ca4889ae21d17274e36833", "78e0622191554a49a350cbe47d5fbc50"]} id="Tb2Jg3f9jx-S" outputId="ce24700f-f124-47de-9608-bd6ac01065de"
 # !shred -u setup_colab_general.py
 # !wget -q "https://github.com/jpcano1/python_utils/raw/main/setup_colab_general.py" -O setup_colab_general.py
 import setup_colab_general as setup_general
 
 setup_general.setup_general()
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 40618, "status": "ok", "timestamp": 1645572082384, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="yqAdW4WNlYXN" outputId="d8b7737c-aa12-450b-edac-c7915a3b1a02"
+# %% id="yqAdW4WNlYXN"
 # !pip install --disable-pip-version-check --progress-bar off -q https://github.com/pandas-profiling/pandas-profiling/archive/master.zip
 # !pip install --disable-pip-version-check --progress-bar off -q tabulate
 
 # %% [markdown] id="Am5V_Yb1ntVC"
 # ## **Importando la librerías necesarias**
-
-# %% executionInfo={"elapsed": 187, "status": "ok", "timestamp": 1645573796627, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="ebTvp-cCwAsQ"
+# %% id="ebTvp-cCwAsQ"
 import os
 
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 
 plt.style.use("seaborn-deep")
 
@@ -47,6 +44,8 @@ plt.style.use("seaborn-deep")
 import itertools
 from typing import Optional
 
+import numpy as np
+import pandas as pd
 import pandas_profiling
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
@@ -58,7 +57,7 @@ from tabulate import tabulate
 
 from utils import general as gen
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 49, "referenced_widgets": ["8b89567e354a4e40a1172f82916a511c", "e8b207d9f4264815a5eb80159e03ddb1", "fc31b040db6c4d4aa48c642408bb1dd4", "31dee1517710491bb38383b2de73c64d", "4cbc8c79094942caa11b2a5c56395c7c", "4ff3b90cdb4e477995c1c542be1d247f", "906cd9ed90ad47858431e96c0d1a2795", "211dd72ef9444b07917d587a66792702", "be1538ff3fd64530bbefe18ecd152d3e", "a83080648e6942ab99ad26b7ab30d62e", "89e6287d42794cfe9e0e8833f3401dc0"]} executionInfo={"elapsed": 1241, "status": "ok", "timestamp": 1645572230131, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="CtzhV51Hwa5p" outputId="ca62a01d-d1a9-4d6f-935a-806dba6f63b6"
+# %% colab={"base_uri": "https://localhost:8080/", "referenced_widgets": ["8f32ac9affd94093a82965446c22a1d6", "4b1d20d0b9e74ee89d8ef7268f013fe8", "d9286e6079d14ad88f1a39687feeea4b", "7532de9b083d4a978579b7e9d5d01f24", "18a0f8191bf0443e8a41e252a4fa9a4a", "1773c0cda1864c4884dcbaef0bfab8db", "489c0dea7aca4a038221829119dd6b2c", "72647a8834254e5084010cdd80b9feec", "d6b1b23f40124546884d41b134d3bc8b", "e96c2b8830294aa9a4cda6782992a319", "e31accab95874bca9428ad25996f8dbe"]} id="CtzhV51Hwa5p" outputId="f479c4a9-fe08-458e-dc21-2cd5c9e10a96"
 data_url = (
     "https://raw.githubusercontent.com/"
     "Camilojaravila/202210_MINE-4206_ANAL"
@@ -90,22 +89,22 @@ gen.download_content(data_url, filename="russian_prices.csv")
 # %% [markdown] id="tvVbLTlBE6mh"
 # A continuación, se leen los datos y se revisan las primeras líneas para verficar que la carga fue exitosa
 
-# %% executionInfo={"elapsed": 160, "status": "ok", "timestamp": 1645574085863, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="kj0nEuMvxWad"
+# %% id="kj0nEuMvxWad"
 russian_prices_df = pd.read_csv("data/russian_prices.csv")
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 206} executionInfo={"elapsed": 245, "status": "ok", "timestamp": 1645574086316, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="2wS1sFwMj6uO" outputId="29f52ad1-51fe-4ab6-8e9b-35481abe4192"
+# %% colab={"base_uri": "https://localhost:8080/"} id="2wS1sFwMj6uO" outputId="1a289b70-6d2f-43ff-c40f-b98ecaba21d7"
 russian_prices_df.head()
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 3, "status": "ok", "timestamp": 1645574087350, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="wfg_2vpIj8-_" outputId="56f84ce2-f61a-479a-89f8-4d85b12eb890"
+# %% colab={"base_uri": "https://localhost:8080/"} id="wfg_2vpIj8-_" outputId="61788701-a72e-4bbe-b3d6-1e872a8e9268"
 russian_prices_df.info()
 
-# %% executionInfo={"elapsed": 147, "status": "ok", "timestamp": 1645574091462, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Wl1BKpS4xAw2"
+# %% id="Wl1BKpS4xAw2"
 profiler = pandas_profiling.ProfileReport(russian_prices_df, dark_mode=True)
 
 # %% [markdown] id="zfOPUCD0wNxc"
 # - El perfilamiento se encuentra en los anexos.
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 145, "referenced_widgets": ["1b2ac17108874ba4a03702d74c083dc1", "d57be4b11b4e4443ac2fe1436cf1d633", "c1a882ef442d4c199d9e88773fe54b26", "fc9a3ee5d69741128e51dfe33943eb5f", "be84857a1576469db69b3a111f2e3c81", "f6a81f831a3e439e81d1200b6e0a6c22", "6ad903acb3df43e39cc2f1e4d19a8da9", "2bf6ccfe45994627aa524c74340388eb", "cef2e0d6e9314b96b031cbad27c49443", "ce7a820eda4c4a268334d7f4bb255145", "30ce20111cd14d43b73d6c050e6e1ae5", "1dc78e23549e4f23a5c8b7270870e848", "8795a8b7db3845209ef5ac9d059b6b9d", "3347118a46cf49849f14a63968123bb5", "ae4085daf7974802b08a130c68fc5822", "37c66de59f37462bbe83534a584ee2a3", "8eab4d065a674a8782bab260ea09c4f2", "27067ce81281487ca1d82c1f5a0b2b9a", "133eaa5acb994a4abeb6a64dbae8b997", "57258020a1fb4cf1a68b2b728f42aee0", "6ceff0541d0244a694ed328d766fe1ad", "8034b9d4d15341b2925b24402be424c9", "9f3657a8b98e4728a1b3d98116550981", "d177c3f540a8461ebfa238c19cbba19d", "6364297eeda24bd29e13ae6234e5d9c2", "b416ee454d844e3f8176567b352807c8", "4e27d92afd8449648837dfbbff484417", "8cd0a2b0061d4e69aa96639c03df6360", "d0a8733532a845c68bde44a48b3b84b2", "19df0d3f78db4cd5a6560a4536e14232", "41e01814145d4c8c97e1e51b49d558d6", "1d8538337bc74194849c4ef1587c6255", "5dce4f679e0b44a7bddd69c737ce997f", "467c5676b03844a290f31c008afce209", "f2f5a385f0d6456eaf01bd6b38b83641", "b780269ebd68448cbf51d3969da1f122", "db8a2cb9aca442b88196deffae9f4d7e", "b81c840d52fd4b48b8bb77c33339380c", "a45bd7fed3ab40b2ae9da19bea0051be", "9e12d145b4194735b50cd0e175da6662", "f8796a8e4f5445609938d6ee9f7ab925", "337e212047e649b0ac6a918e0c6e8381", "94dc15d966db4637b335c61bd2f7c2ec", "492240f2ce6c46c09423ba877ed783cd"]} executionInfo={"elapsed": 49934, "status": "ok", "timestamp": 1645574142258, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="ztSi0cuPxffs" outputId="d0525cc1-b35f-4841-81a4-5d355736c828"
+# %% colab={"base_uri": "https://localhost:8080/", "referenced_widgets": ["43552aa81edb4d549039620ba4f5e219", "59b1f7c7890044eeabc09b440ec2179b", "658be1c5915748eaa1e145ee16025c68", "cb1a99b1c43047e4b18dbe88cfce10bb", "5528a149e1da4d76ad182fb73fb7d540", "8bac1b90e20549ccb5954d64b329229e", "ff378d55cf9d471abe1a70f9fae5a2a4", "5de5caaef3224713b8baff7e03b672e7", "f532373581a14500a9a52b55643d0cd2", "c044d2abff9e4234b24282312d63aabb", "497800d0848f40478c2385c362944b70", "e9ac7ae4f4e148d49189cf2e82e10b85", "1b86aad8a58d4855850c7da938397545", "a84574e678d54475adccd2f1830d98b7", "6fba2332a3904402bc5849ca2ec8d8b4", "c7f19e79908a4580b9c21802660c16eb", "3f000da7a9554c85b81577680406a5fc", "035209bb241840ecba66b532383e2fe3", "ff6d580988ea484d88dc3652b597200b", "d7b21b39409e4a9896e8b9c89ee719df", "3595af6e985442b2b03a99eb45e392a6", "1aa66f2d218c46f1b1977bdd4a06a29f", "62da8655840a48588d5f17c851a7704e", "9a019b58dde1427ba137691ce5a9ca45", "fcb628673ba54f3aa18bac9e19ae479d", "6b1d0ddca02b4a5080e3a14f09617876", "43f62b6498844699824740203cbad04e", "29389e45904e4f659450c955be8e340a", "aa6e881d2ce446be9e270244ba2ad91c", "c3a3d6c6bf954f8bbfbb4280e2c60474", "83ffe96d67304724be8a594b3c78eaa5", "ceba62c299b34d2088bc8e0f7e2ef3b6", "92d0c71528b44bff96eccedd65a8f1b0", "8167ec02a4c548ffade77e4532441af5", "db235209d453453aa12a51c2a3cdec89", "8b896ac119904b918f4dc458b111a726", "5655bc92cc4b4d14a0a94092217beb32", "f9157981d403417ebcba1ee5551479cc", "a33e61b591394ddfb951523aa84a2e52", "6396e9cb24de43598929c0e0fc8c620a", "e431c4fce170458f87f822281db1e3d6", "b7cee479ea9e45e181ff7997e2cd2ca8", "1dced353eb414a9392a77d9c41c1de95", "b9c729011d924b4699445652699f8503"]} id="ztSi0cuPxffs" outputId="0213797c-0761-4293-c541-e30ca32dfa90"
 if not os.path.exists("profiling_reports"):
     os.makedirs("profiling_reports")
 profiler.to_file("profiling_reports/russian_prices_profile.html")
@@ -113,42 +112,42 @@ profiler.to_file("profiling_reports/russian_prices_profile.html")
 # %% [markdown] id="oO11RRE2VWAN"
 # - Las siguientes columnas se eliminaron bajo el supuesto de que no son necesarias para el objetivo de negocio. La primera columna es un identificador de propiedad, ergo, no es significativa. Las columnas `time` y `date` son columnas relacionadas a la publicación, más no a la propiedad perse, por lo tanto, no son significativas para nuestro modelo.
 
-# %% executionInfo={"elapsed": 36, "status": "ok", "timestamp": 1645574142259, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="xUQji5iQi4oY"
+# %% id="xUQji5iQi4oY"
 columns_to_delete = [
     "Unnamed: 0",
     "time",
     "date",
 ]
 
-# %% executionInfo={"elapsed": 34, "status": "ok", "timestamp": 1645574142260, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="HuVpJcPpjox-"
+# %% id="HuVpJcPpjox-"
 russian_prices_df.drop(columns=columns_to_delete, inplace=True)
 
 # %% [markdown] id="k9tWqKeNsACK"
 # - Todas las columnas con valores nulos fueron removidas
 
-# %% executionInfo={"elapsed": 33, "status": "ok", "timestamp": 1645574142260, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="rdgm3ridkZhS"
+# %% id="rdgm3ridkZhS"
 russian_prices_df.dropna(inplace=True)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 32, "status": "ok", "timestamp": 1645574142260, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="2fvSWw_hj1wS" outputId="8053a42a-3ee2-4a43-a733-40e5bbaf4fbb"
+# %% colab={"base_uri": "https://localhost:8080/"} id="2fvSWw_hj1wS" outputId="aea14985-ac08-4ddb-c820-f8e4e371ecd8"
 russian_prices_df.info()
 
-# %% executionInfo={"elapsed": 159, "status": "ok", "timestamp": 1645574146783, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="NXiS5wFokqHi"
+# %% id="NXiS5wFokqHi"
 russian_prices_df = russian_prices_df.apply(lambda x: x.astype("int32"))
 russian_prices_df["object_type"] = russian_prices_df["object_type"].apply(
     lambda x: 2 if x == 11 else x
 )
 russian_prices_df["rooms"] = russian_prices_df["rooms"].apply(lambda x: -1 if x == -2 else x)
 
-# %% executionInfo={"elapsed": 192, "status": "ok", "timestamp": 1645574148264, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="dYivdCPnwfuo"
+# %% id="dYivdCPnwfuo"
 rows_to_drop = russian_prices_df.query(
     "kitchen_area + 5 >= area | area <= 10 | price <= 2000"
 ).index
 russian_prices_df = russian_prices_df.drop(rows_to_drop).reset_index(drop=True)
 
-# %% executionInfo={"elapsed": 4, "status": "ok", "timestamp": 1645574148456, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="V7BDrFLJmcN9"
+# %% id="V7BDrFLJmcN9"
 X, y = russian_prices_df.drop("price", axis=1), russian_prices_df["price"]
 
-# %% executionInfo={"elapsed": 145, "status": "ok", "timestamp": 1645574149733, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Gh_LIlQTmm0S"
+# %% id="Gh_LIlQTmm0S"
 full_X_train, X_test, full_y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=1234
 )
@@ -156,13 +155,13 @@ X_train, X_val, y_train, y_val = train_test_split(
     full_X_train, full_y_train, test_size=0.2, random_state=1234
 )
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 4, "status": "ok", "timestamp": 1645574149953, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="eEtwMvsAmogC" outputId="19421fab-345f-4dfc-c19b-f8ca0e9f6a41"
+# %% colab={"base_uri": "https://localhost:8080/"} id="eEtwMvsAmogC" outputId="4362362f-68c0-4c00-d671-495085c99382"
 X_train.shape, y_train.shape
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 163, "status": "ok", "timestamp": 1645574152194, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="M3JwOPusnIpn" outputId="4814fcad-3e74-402f-84f7-f8754b00e18f"
+# %% colab={"base_uri": "https://localhost:8080/"} id="M3JwOPusnIpn" outputId="66c0f45e-ed9e-4e7a-bc3e-ab59c717bc4a"
 X_val.shape, y_val.shape
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 5, "status": "ok", "timestamp": 1645574152360, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="0QveAb5em00v" outputId="9db249db-3c83-4469-b77f-0e8b2e325c4c"
+# %% colab={"base_uri": "https://localhost:8080/"} id="0QveAb5em00v" outputId="c75a4fc7-79a8-4c3f-b185-8b02830bd599"
 X_test.shape, y_test.shape
 
 
@@ -171,18 +170,15 @@ X_test.shape, y_test.shape
 
 # %% [markdown] id="16UKiXe_TM12"
 # ### **Regresión Polinómial**
-# #### **Entrenamiento**
+# #### **Entrenamiento (Sin estandarización)**
 
 # %% [markdown] id="zHyXQXfb2qAG"
 # Se define la clase para realizar la transformación polinomial de nuetras variables
 
-# %% executionInfo={"elapsed": 149, "status": "ok", "timestamp": 1645574153990, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="1EeXFbK_pP7a"
+# %% id="1EeXFbK_pP7a"
 class ToPolynomial(BaseEstimator, TransformerMixin):
     def __init__(self, k: int = 2) -> None:
         self.k = k
-
-    def fit(self, X, y=None):
-        return self
 
     def transform(self, X: pd.DataFrame, y: Optional[pd.Series] = None) -> pd.DataFrame:
         columns = X.columns
@@ -193,8 +189,7 @@ class ToPolynomial(BaseEstimator, TransformerMixin):
             [[i + " " + str(j + 1) for i in columns] for j in range(self.k)], -1
         )
         temp = pd.concat(
-            [X[i[0]] * X[i[1]] for i in list(itertools.combinations(columns, 2))],
-            axis=1,
+            [X[i[0]] * X[i[1]] for i in list(itertools.combinations(columns, 2))], axis=1
         )  # Combinaciones sólo de grado 1
         temp.columns = [" ".join(i) for i in list(itertools.combinations(columns, 2))]
         X_train_pol = pd.concat([X_train_pol, temp], axis=1)
@@ -204,7 +199,7 @@ class ToPolynomial(BaseEstimator, TransformerMixin):
 # %% [markdown] id="Fj3hG4RM2wLO"
 # Se crea un pipeline para encapsular los pasos de entrenamiento de nuestro modelo. Primero se realiza la transformación polinamial de las variables y estas se utilizan para entrenar el modelo de regresión lineal.
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 280, "status": "ok", "timestamp": 1645574156411, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="2yMSJKDloOZi" outputId="8d1006f7-2e7a-46a7-82a4-7a5e1c059fac"
+# %% colab={"base_uri": "https://localhost:8080/"} id="2yMSJKDloOZi" outputId="de3292b9-2b6c-42ee-ebb0-e0af96d5e87d"
 estimators = [("polinomial", ToPolynomial()), ("regresion", LinearRegression())]
 
 pipe_pol = Pipeline(estimators)
@@ -214,20 +209,20 @@ pipe_pol.fit(X_train, y_train)
 # %% [markdown] id="0G2Ruy0T4DUD"
 #  Parámetros entrenados por la Regresión Polinomial
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 7, "status": "ok", "timestamp": 1645574157051, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="eCPY09nsTcWK" outputId="d999de95-85a3-49f6-ca05-f1c73f1fdcdd"
+# %% colab={"base_uri": "https://localhost:8080/"} id="eCPY09nsTcWK" outputId="2ca0f684-34c3-482b-c1ed-6dcc3ac6f9b2"
 reg_lineal = pipe_pol["regresion"]
 
 print("Intercept: ", reg_lineal.intercept_)
 print("Coefficients: ", reg_lineal.coef_)
 
 # %% [markdown] id="epQPSIhSTWXo"
-# #### **Validación**
+# #### **Validación (Sin estandarización)**
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 270, "status": "ok", "timestamp": 1645574159588, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="-epy5ZCTT2hd" outputId="96f6cb63-c24b-4d9a-80fa-14631dd49364"
+# %% colab={"base_uri": "https://localhost:8080/"} id="-epy5ZCTT2hd" outputId="15884a59-7aca-42a3-dad3-1307f841f369"
 y_pred = pipe_pol.predict(X_val)
 y_pred
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 5, "status": "ok", "timestamp": 1645574159756, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="UzYpZljfT9qv" outputId="6418c3ba-368d-4a37-ddfa-e5388e7e7eea"
+# %% colab={"base_uri": "https://localhost:8080/"} id="UzYpZljfT9qv" outputId="8971380f-21df-46e7-8982-391455700b5b"
 r2_poly = r2_score(y_val, y_pred)
 mse_poly = mean_squared_error(y_val, y_pred)
 mae_poly = mean_absolute_error(y_val, y_pred)
@@ -237,10 +232,11 @@ print(f"R2-score: {r2_poly:.7f}")
 print(f"Residual sum of squares (MSE): {mse_poly:.5f}")
 print(f"Mean absolute error: {mae_poly:.5f}")
 
+
 # %% [markdown] id="hWv4uZTyeZ1l"
 # #### **Comportamiento de los datos reales vs los datos predecidos**
 
-# %% executionInfo={"elapsed": 5, "status": "ok", "timestamp": 1645574162010, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="lt_fp3tjdVJy"
+# %% id="lt_fp3tjdVJy"
 # %matplotlib inline
 
 
@@ -258,8 +254,60 @@ def draw_chart(y_val_p, y_pred_p, title, legend):
     plt.show()
 
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 729} executionInfo={"elapsed": 802, "status": "ok", "timestamp": 1645574164620, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="HA1FneL3hcOX" outputId="b042285d-8e7f-4a9d-91c3-5d2da027213e"
+# %% colab={"base_uri": "https://localhost:8080/", "height": 729} id="HA1FneL3hcOX" outputId="6d31ad8a-ad46-415b-b9f1-0a04504241df"
 draw_chart(y_val, y_pred, "Predicción con Regresión Polinomial", "Regresión Polinomial")
+
+# %% [markdown] id="2L9PZ3OiPh9H"
+# #### **Entrenamiento (Con estandarización)**
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="WfoASDJqPhMt" outputId="365908bf-eec1-497a-f4db-ca22cc66fa37"
+estimators_2 = [
+    ("polinomial", ToPolynomial()),
+    ("normalizar", StandardScaler()),
+    ("regresion", LinearRegression()),
+]
+
+pipe_pol_s = Pipeline(estimators_2)
+
+pipe_pol_s.fit(X_train, y_train)
+
+# %% [markdown] id="H6VmO045P6MN"
+#  Parámetros entrenados por la Regresión Polinomial
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="h0C0dPUTQZfw" outputId="74a2f6ba-0d3d-462b-91f6-5d83be0ffea4"
+reg_lineal_s = pipe_pol_s["regresion"]
+
+print("Intercept: ", reg_lineal_s.intercept_)
+print("Coefficients: ", reg_lineal_s.coef_)
+
+# %% [markdown] id="xIYXvQSOQjqP"
+# #### **Validación (Con estandarización)**
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="w5I-DSlPQpO7" outputId="fce4b816-88c8-43d1-9d18-54fd6b318b64"
+y_pred_1b = pipe_pol_s.predict(X_val)
+y_pred_1b
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="DA3xqeyjQ1X9" outputId="489e69b3-10e1-4d03-9140-f580a5de423c"
+r2_poly_s = r2_score(y_val, y_pred_1b)
+mse_poly_s = mean_squared_error(y_val, y_pred_1b)
+mae_poly_s = mean_absolute_error(y_val, y_pred_1b)
+
+print("------------ Polynomial Regression ------------")
+print(f"R2-score: {r2_poly_s:.7f}")
+print(f"Residual sum of squares (MSE): {mse_poly_s:.5f}")
+print(f"Mean absolute error: {mae_poly_s:.5f}")
+
+# %% [markdown] id="0TwCRPfGRFve"
+# #### **Comportamiento de los datos reales vs los datos predecidos**
+
+# %% colab={"base_uri": "https://localhost:8080/", "height": 729} id="9pWcfymsRGYG" outputId="6ef5214c-bcbf-430a-989d-41a036201963"
+# %matplotlib inline
+draw_chart(
+    y_val,
+    y_pred_1b,
+    "Predicción con Regresión Polinomial (con estandarización)",
+    "Regresión Polinomial",
+)
 
 # %% [markdown] id="ud_HEwjZoOrq"
 # ### **Regresión Ridge**
@@ -267,21 +315,21 @@ draw_chart(y_val, y_pred, "Predicción con Regresión Polinomial", "Regresión P
 #
 #
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 169, "status": "ok", "timestamp": 1645574167726, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="rnnb_rWBoRHa" outputId="907ff1e6-939a-4077-d745-011977d8997f"
+# %% colab={"base_uri": "https://localhost:8080/"} id="rnnb_rWBoRHa" outputId="538b5f4a-cac6-4919-babf-d9a095c15c05"
 ridge_reg = Ridge()
 ridge_reg.fit(X_train, y_train)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 3, "status": "ok", "timestamp": 1645574167890, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="xe1WtO-IiepT" outputId="fce0d49b-d8d0-4a21-96c0-6184057903b3"
+# %% colab={"base_uri": "https://localhost:8080/"} id="xe1WtO-IiepT" outputId="fdc0f7eb-78d2-4143-c21e-9e227f36c78a"
 ridge_coef = dict(zip(X_train.columns, ridge_reg.coef_))
 ridge_coef
 
 # %% [markdown] id="Zdx6xzlXdN0b"
 # #### **Validación**
 
-# %% executionInfo={"elapsed": 163, "status": "ok", "timestamp": 1645574172582, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="26Wmz50fdRx5"
+# %% id="26Wmz50fdRx5"
 y_pred_2 = ridge_reg.predict(X_val)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 209, "status": "ok", "timestamp": 1645574172977, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="EvQB0EHsi_Fm" outputId="5a95ae13-ff7c-473f-94a8-a9fad90676ec"
+# %% colab={"base_uri": "https://localhost:8080/"} id="EvQB0EHsi_Fm" outputId="03d2c814-640b-4820-c993-f5ef9ccbc785"
 r2_ridge = r2_score(y_val, y_pred_2)
 mse_ridge = mean_squared_error(y_val, y_pred_2)
 mae_ridge = mean_absolute_error(y_val, y_pred_2)
@@ -294,14 +342,14 @@ print(f"Mean absolute error: {mae_ridge:.5f}")
 # %% [markdown] id="UkIx8aTSe8JA"
 # #### **Comportamiento de los datos reales vs los datos predecidos**
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 729} executionInfo={"elapsed": 959, "status": "ok", "timestamp": 1645574177978, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="bkaeBDIuevsV" outputId="cb4f1aa1-2910-4c7c-e714-94fe6b5d31cb"
+# %% colab={"base_uri": "https://localhost:8080/", "height": 729} id="bkaeBDIuevsV" outputId="84b6d593-b37d-4859-b5fb-02403bb6967c"
 # %matplotlib inline
 draw_chart(y_val, y_pred_2, "Predicción con regresion Ridge", "Regresion Ridge")
 
 # %% [markdown] id="9Pd-sS9eYGzD"
 # #### **Entrenamiento (Con estandarización)**
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 157, "status": "ok", "timestamp": 1645574187308, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="wcsl9CmhYJ_7" outputId="80ee7a4b-9df9-456c-83ac-b74e133c36e7"
+# %% colab={"base_uri": "https://localhost:8080/"} id="wcsl9CmhYJ_7" outputId="87b33712-c50b-48bd-a95e-c8c1f9a916d1"
 pipeline_ridge = Pipeline(
     [
         ("scaler", StandardScaler()),
@@ -311,17 +359,17 @@ pipeline_ridge = Pipeline(
 
 pipeline_ridge.fit(X_train, y_train)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 7, "status": "ok", "timestamp": 1645574197207, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="lLkPRJlSZZvS" outputId="939dbe26-e732-4f6c-f3b8-7a3c0e0e0156"
+# %% colab={"base_uri": "https://localhost:8080/"} id="lLkPRJlSZZvS" outputId="cb398eb4-7f8d-45aa-f485-dc7b8ca62319"
 ridge_coef = dict(zip(X_train.columns, pipeline_ridge.steps[1][1].coef_))
 ridge_coef
 
 # %% [markdown] id="dflufl4waDcF"
 # #### **Validación**
 
-# %% executionInfo={"elapsed": 183, "status": "ok", "timestamp": 1645574200454, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="6SYHTEbBaHiw"
+# %% id="6SYHTEbBaHiw"
 y_pred_2b = pipeline_ridge.predict(X_val)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 4, "status": "ok", "timestamp": 1645574200606, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="EelZTCKzaMSL" outputId="ce5e0dc3-2097-405c-e5c0-1387e608e5a7"
+# %% colab={"base_uri": "https://localhost:8080/"} id="EelZTCKzaMSL" outputId="7728db79-cd20-4f04-f94a-60ddd0489289"
 r2_ridge_s = r2_score(y_val, y_pred_2b)
 mse_ridge_s = mean_squared_error(y_val, y_pred_2b)
 mae_ridge_s = mean_absolute_error(y_val, y_pred_2b)
@@ -334,34 +382,31 @@ print(f"Mean absolute error: {mae_ridge_s:.5f}")
 # %% [markdown] id="rbeZ9Bc2gxRu"
 # #### **Comportamiento de los datos reales vs los datos predecidos**
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 729} executionInfo={"elapsed": 907, "status": "ok", "timestamp": 1645574206676, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="JRh9LRiNigzY" outputId="e9d8057f-92a8-4871-c317-f6395b2669ad"
+# %% colab={"base_uri": "https://localhost:8080/"} id="JRh9LRiNigzY" outputId="a1a96ea3-df1c-4366-da30-a625f913521f"
 # %matplotlib inline
 draw_chart(
-    y_val,
-    y_pred_2b,
-    "Predicción con regresion Ridge (Con estandarización)",
-    "Regresion Ridge",
+    y_val, y_pred_2b, "Predicción con regresion Ridge (Con estandarización)", "Regresion Ridge"
 )
 
 # %% [markdown] id="mQ_FoF7RoRX9"
 # ### **Regresión Lasso**
 # #### **Entrenamiento (Sin estandarización)**
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 194, "status": "ok", "timestamp": 1645574212938, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="TLdd00Wdm69O" outputId="ade54953-1ed2-43d6-e054-af77c9a60dc7"
+# %% colab={"base_uri": "https://localhost:8080/"} id="TLdd00Wdm69O" outputId="e74fa362-6a4f-4f75-ceec-7ab3e051ca69"
 lasso_reg = Lasso()
 lasso_reg.fit(X_train, y_train)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 5, "status": "ok", "timestamp": 1645574213168, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="atcLgUTkoaKF" outputId="96ad5fb1-57f6-426f-8bd6-262ed3f92248"
+# %% colab={"base_uri": "https://localhost:8080/"} id="atcLgUTkoaKF" outputId="60b2b2c5-dc4d-4db4-c7d6-0680047148ee"
 lasso_coef = dict(zip(X_train.columns, lasso_reg.coef_))
 lasso_coef
 
 # %% [markdown] id="NE0rheOho8Oj"
 # #### **Validación**
 
-# %% executionInfo={"elapsed": 152, "status": "ok", "timestamp": 1645574215952, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="yRCL86NIokX6"
+# %% id="yRCL86NIokX6"
 y_pred_3 = lasso_reg.predict(X_val)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 161, "status": "ok", "timestamp": 1645574223887, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="htf4tAfFbPDT" outputId="bb3e0518-f9b6-4aab-ce08-9f72d15b83b0"
+# %% colab={"base_uri": "https://localhost:8080/"} id="htf4tAfFbPDT" outputId="10d2e563-2f80-45a6-b373-355d5a554da7"
 r2_lasso = r2_score(y_val, y_pred_3)
 mse_lasso = mean_squared_error(y_val, y_pred_3)
 mae_lasso = mean_absolute_error(y_val, y_pred_3)
@@ -374,14 +419,14 @@ print(f"Mean absolute error: {mae_lasso:.5f}")
 # %% [markdown] id="VMbo3Ep9kWGZ"
 # #### **Comportamiento de los datos reales vs los datos predecidos**
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 729} executionInfo={"elapsed": 1457, "status": "ok", "timestamp": 1645574228893, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="xeorxVPNkeMg" outputId="d04ba059-9312-436d-fceb-e1332153ac8f"
+# %% colab={"base_uri": "https://localhost:8080/"} id="xeorxVPNkeMg" outputId="8741cd6e-692d-412a-fc08-699b4d269218"
 # %matplotlib inline
 draw_chart(y_val, y_pred_3, "Predicción con regresion Lasso", "Regresion Lasso")
 
 # %% [markdown] id="FCjiiBzKcbTY"
 # #### **Entrenamiento (Con estandarización)**
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 196, "status": "ok", "timestamp": 1645574236069, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Em51FsVrr62S" outputId="8f0f66fb-23f9-4b53-cdbb-83d36ea06607"
+# %% colab={"base_uri": "https://localhost:8080/"} id="Em51FsVrr62S" outputId="ce820441-1436-4d4a-ce70-f44d2003e55b"
 pipeline = Pipeline(
     [
         ("scaler", StandardScaler()),
@@ -391,17 +436,17 @@ pipeline = Pipeline(
 
 pipeline.fit(X_train, y_train)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 5, "status": "ok", "timestamp": 1645574236215, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="QuqmS5LTdjr9" outputId="4a28097b-ad82-4751-f11c-ded4ea6c0760"
+# %% colab={"base_uri": "https://localhost:8080/"} id="QuqmS5LTdjr9" outputId="10de4b6b-69e5-4baf-a215-2c43c6a928dd"
 lasso_coef = dict(zip(X_train.columns, pipeline.steps[1][1].coef_))
 lasso_coef
 
 # %% [markdown] id="TYpXgaMxdv77"
 # #### **Validación**
 
-# %% executionInfo={"elapsed": 151, "status": "ok", "timestamp": 1645574240734, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="TguKWWZwdn9a"
+# %% id="TguKWWZwdn9a"
 y_pred_3b = pipeline.predict(X_val)
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 5, "status": "ok", "timestamp": 1645574240966, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="Bv_znLZ-dxlq" outputId="9bacafdc-4482-4970-eb04-636fc807af65"
+# %% colab={"base_uri": "https://localhost:8080/"} id="Bv_znLZ-dxlq" outputId="6175e388-6104-4395-f6a7-4e9eb0e37922"
 r2_lasso_s = r2_score(y_val, y_pred_3b)
 mse_lasso_s = mean_squared_error(y_val, y_pred_3b)
 mae_lasso_s = mean_absolute_error(y_val, y_pred_3b)
@@ -414,25 +459,29 @@ print(f"Mean absolute error: {mae_lasso_s:.5f}")
 # %% [markdown] id="rA8zBvMtkYIp"
 # #### **Comportamiento de los datos reales vs los datos predecidos**
 
-# %% colab={"base_uri": "https://localhost:8080/", "height": 729} executionInfo={"elapsed": 814, "status": "ok", "timestamp": 1645574245641, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="WvJeqiEAky85" outputId="a68a9b7e-13ad-4808-bb24-87c27e6f75c3"
+# %% colab={"base_uri": "https://localhost:8080/"} id="WvJeqiEAky85" outputId="b8a56fa3-2e1c-45c1-d04e-e87866aca8c4"
 # %matplotlib inline
 draw_chart(
-    y_val,
-    y_pred_3b,
-    "Predicción con regresion Lasso (Con estandarización)",
-    "Regresion Lasso",
+    y_val, y_pred_3b, "Predicción con regresion Lasso (Con estandarización)", "Regresion Lasso"
 )
 
 # %% [markdown] id="8-9QFqjSlfFJ"
 # ### **Selección del mejor modelo**
 # Tabla comparativa con los resultados de las métricas R2, MSE y MAE para los 3 modelos entrenados.
 
-# %% colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 183, "status": "ok", "timestamp": 1645574256112, "user": {"displayName": "Juan Pablo Cano", "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggpvl16I60w7jnrbdVFshSpDWtSuXlYdGvZAOpQXQ=s64", "userId": "14080729078587151746"}, "user_tz": 300} id="lWomqAnlmJK7" outputId="5fe9ff87-c55a-4f6b-a48b-a6348aca22b1"
+# %% colab={"base_uri": "https://localhost:8080/"} id="lWomqAnlmJK7" outputId="d14db8d7-2eff-489a-e2eb-4fd951555ff2"
 info = {
-    "Model": ["Poly Regression", "Ridge", "Ridge (con S)", "Lasso", "Lasso (con S)"],
-    "R2": [r2_poly, r2_ridge, r2_ridge_s, r2_lasso, r2_lasso_s],
-    "MSE": [mse_poly, mse_ridge, mse_ridge_s, mse_ridge, mse_lasso_s],
-    "MAE": [mae_poly, mae_ridge, mae_ridge_s, mae_lasso, mae_lasso_s],
+    "Model": [
+        "Poly Regression",
+        "Poly Regression (con S)",
+        "Ridge",
+        "Ridge (con S)",
+        "Lasso",
+        "Lasso (con S)",
+    ],
+    "R2": [r2_poly, r2_poly_s, r2_ridge, r2_ridge_s, r2_lasso, r2_lasso_s],
+    "MSE": [mse_poly, mse_poly_s, mse_ridge, mse_ridge_s, mse_ridge, mse_lasso_s],
+    "MAE": [mae_poly, mae_poly_s, mae_ridge, mae_ridge_s, mae_lasso, mae_lasso_s],
 }
 
 print(tabulate(info, headers="keys", tablefmt="fancy_grid"))
@@ -441,3 +490,72 @@ print(tabulate(info, headers="keys", tablefmt="fancy_grid"))
 # ### **Optimización de hiperparámetros para el mejor modelo**
 
 # %% id="eWSPKRNod7fJ"
+parameters = {"polinomial__k": [2, 3, 4, 5], "normalizar": [StandardScaler(), "passthrough"]}
+
+grid_search = GridSearchCV(
+    pipe_pol_s, parameters, verbose=2, scoring="neg_mean_squared_error", cv=5, n_jobs=-1
+)
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="PYd51X78SOoF" outputId="c15c344d-f0d1-4fbc-d199-c3b318ad5f8a"
+grid_search.fit(X_train, y_train)
+
+# %% colab={"base_uri": "https://localhost:8080/", "height": 711} id="GIPcgonDTMwX" outputId="8578c137-d2cc-4da6-eb96-c34b941823c6"
+best_model = grid_search.best_estimator_
+
+pd.DataFrame(grid_search.cv_results_)
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="w_kM-BRhTPcj" outputId="46490f76-64fb-4ceb-dfce-5891719a0aec"
+grid_search.best_params_
+
+# %% id="iS-M3gxsTgNX"
+y_pred_final = best_model.predict(X_val)
+y_pred_final_e = best_model.predict(X_train)
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="pxwDgaI4Tg4X" outputId="b1db8efc-3a22-4b57-cf6f-f202af0de1de"
+r2_final_e = r2_score(y_train, y_pred_final_e)
+mse_def_e = mean_squared_error(y_train, y_pred_final_e)
+mae_poly_final_e = mean_absolute_error(y_train, y_pred_final_e)
+
+print("------------ Polynomial Regression Entrenamiento------------")
+print(f"R2-score: {r2_final_e:.7f}")
+print(f"Residual sum of squares (MSE): {mse_def_e:.5f}")
+print(f"Mean absolute error: {mae_poly_final_e:.5f}")
+
+r2_final = r2_score(y_val, y_pred_final)
+mse_def = mean_squared_error(y_val, y_pred_final)
+mae_poly_final = mean_absolute_error(y_val, y_pred_final)
+
+print("------------ Polynomial Regression Validacion ------------")
+print(f"R2-score: {r2_final:.7f}")
+print(f"Residual sum of squares (MSE): {mse_def:.5f}")
+print(f"Mean absolute error: {mae_poly_final:.5f}")
+
+# %% [markdown] id="O4adCe_SUJ7e"
+# #### **Comportamiento de los datos reales vs los datos predecidos**
+
+# %% colab={"base_uri": "https://localhost:8080/", "height": 729} id="f9BUndGKUp_7" outputId="cfabc291-087a-494a-e612-c0e7319c2da6"
+draw_chart(y_val, y_pred_final, "Predicción con Regresión Polinomial", "Regresión Polinomial")
+
+# %% [markdown] id="ds0LmmujVqOr"
+# Variables del modelo
+
+# %% colab={"base_uri": "https://localhost:8080/", "height": 441} id="lOpX332AVstA" outputId="ebbace87-82cc-4e3b-9440-f8d8c10d08b7"
+reg_model = best_model["regresion"]
+fake_df = best_model["polinomial"].transform(X_val)
+print(f"Intercepto: {reg_model.intercept_}")
+coef = list(
+    zip(["Intercepto"] + list(fake_df.columns), [reg_model.intercept_] + list(reg_model.coef_))
+)
+coef = pd.DataFrame(coef, columns=["Variable", "Parámetro"])
+coef
+
+# %% colab={"base_uri": "https://localhost:8080/", "height": 423} id="EUvheoTsW2SN" outputId="3d3be266-8902-46ca-99a6-5b96133a7a82"
+coef.sort_values("Parámetro")
+
+# %% colab={"base_uri": "https://localhost:8080/", "height": 80} id="b0ErhLliWldS" outputId="d3274cd1-6d86-4569-d98a-20efc2405833"
+coef[coef["Parámetro"].between(-1, 1)]
+
+# %% colab={"base_uri": "https://localhost:8080/"} id="6gZhsvIYXJOf" outputId="8a9fe673-463a-46a5-e780-e476c287a42b"
+from joblib import dump, load
+
+dump(best_model, "poly_regressor.pkl")
