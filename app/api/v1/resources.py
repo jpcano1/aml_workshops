@@ -42,7 +42,48 @@ class Taller1(Resource):
     )
     def post(self, **kwargs):
         """
-        
+        Taller 1 prediction endpoint.
+
+        ---
+        tags:
+            - Talleres
+        parameters:
+          - in: body
+            name: body
+            required: true
+            schema:
+                type: object
+                properties:
+                    latitude:
+                        type: number
+                        required: true
+                    longitude:
+                        type: number
+                        required: true
+                    region:
+                        type: number
+                        required: true
+                    building_type:
+                        type: number
+                        required: true
+                    level:
+                        type: number
+                        required: true
+                    levels:
+                        type: number
+                        required: true
+                    rooms:
+                        type: number
+                        required: true
+                    area:
+                        type: number
+                        required: true
+                    kitchen_area:
+                        type: number
+                        required: true
+                    object_type:
+                        type: number
+                        required: true
         """
         controller = Taller1Controller(**kwargs)
 
