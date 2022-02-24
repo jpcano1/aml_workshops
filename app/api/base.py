@@ -17,12 +17,16 @@ def init_app() -> Flask:
     else:
         flask_app.config.from_object(Development)
 
+    CORS(flask_app)
+
     Swagger(
         flask_app,
         template=swagger_template({}),
         config=swagger_config(),
     )
 
-    CORS(flask_app)
+    from .v1 import v1
+
+    flask_app.register_blueprint(v1)
 
     return flask_app

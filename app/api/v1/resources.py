@@ -1,6 +1,23 @@
+from http import HTTPStatus
+
 from flask_restful import Resource, abort
 from webargs import fields, validate
 from webargs.flaskparser import use_kwargs
+
+
+class Health(Resource):
+    def get(self):
+        """
+        Health check route.
+
+        ---
+        tags:
+            - Health check
+        responses:
+            200:
+                description: Hello world!
+        """
+        return "Hello world", HTTPStatus.OK
 
 
 class Taller1(Resource):
@@ -18,5 +35,5 @@ class Taller1(Resource):
             "object_type": fields.Int(required=True, validate=validate.OneOf([1, 2])),
         }
     )
-    def post(self):
+    def post(self, **kwargs):
         ...
