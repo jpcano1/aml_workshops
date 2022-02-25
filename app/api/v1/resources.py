@@ -84,6 +84,9 @@ class Taller1(Resource):
                     object_type:
                         type: number
                         required: true
+        responses:
+            200:
+                description: Prediction completed
         """
         controller = Taller1Controller(**kwargs)
 
