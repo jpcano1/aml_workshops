@@ -5,7 +5,7 @@
 #     text_representation:
 #       extension: .py
 #       format_name: percent
-#       format_version: "1.3"
+#       format_version: '1.3'
 #       jupytext_version: 1.6.0
 #   kernelspec:
 #     display_name: Python 3
@@ -44,9 +44,10 @@ plt.style.use("seaborn-deep")
 import itertools
 from typing import Optional
 
+import mlflow
 import numpy as np
 import pandas as pd
-import pandas_profiling
+# import pandas_profiling
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -54,7 +55,6 @@ from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from tabulate import tabulate
-
 from utils import general as gen
 
 # %% colab={"base_uri": "https://localhost:8080/", "referenced_widgets": ["8f32ac9affd94093a82965446c22a1d6", "4b1d20d0b9e74ee89d8ef7268f013fe8", "d9286e6079d14ad88f1a39687feeea4b", "7532de9b083d4a978579b7e9d5d01f24", "18a0f8191bf0443e8a41e252a4fa9a4a", "1773c0cda1864c4884dcbaef0bfab8db", "489c0dea7aca4a038221829119dd6b2c", "72647a8834254e5084010cdd80b9feec", "d6b1b23f40124546884d41b134d3bc8b", "e96c2b8830294aa9a4cda6782992a319", "e31accab95874bca9428ad25996f8dbe"]} id="CtzhV51Hwa5p" outputId="f479c4a9-fe08-458e-dc21-2cd5c9e10a96"
@@ -180,7 +180,14 @@ class ToPolynomial(BaseEstimator, TransformerMixin):
     def __init__(self, k: int = 2) -> None:
         self.k = k
 
-    def transform(self, X: pd.DataFrame, y: Optional[pd.Series] = None) -> pd.DataFrame:
+    def fit(self, X, y):
+        return self
+
+    def transform(
+        self,
+        X: pd.DataFrame,
+        y: Optional[pd.Series] = None,
+    ) -> pd.DataFrame:
         columns = X.columns
         X_train_pol = pd.concat(
             [X ** (i + 1) for i in range(self.k)], axis=1
@@ -556,6 +563,6 @@ coef.sort_values("Parámetro")
 coef[coef["Parámetro"].between(-1, 1)]
 
 # %% colab={"base_uri": "https://localhost:8080/"} id="6gZhsvIYXJOf" outputId="8a9fe673-463a-46a5-e780-e476c287a42b"
-from joblib import dump, load
+mlflow.sklearn.log_model(best_model, "taller_1_model")
 
-dump(best_model, "poly_regressor.pkl")
+# %%
