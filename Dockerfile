@@ -8,7 +8,7 @@ WORKDIR /workshops
 COPY requirements/requirements.txt .
 
 RUN apt-get update && \
-    apt-get install -yy libpq-dev build-essential && \
+    apt-get install -y libpq-dev build-essential python3-opencv && \
     pip install -r requirements.txt \
     mkdir app
 
