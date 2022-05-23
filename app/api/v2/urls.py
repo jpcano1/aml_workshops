@@ -13,7 +13,7 @@ model = model_loader()
 """
 Health
 """
-api.add_resource(resources.Health, "/", endpoint="healthcheck")
+api.add_resource(resources.Health, "", endpoint="healthcheck")
 
 """
 Prediction

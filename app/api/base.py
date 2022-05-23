@@ -28,7 +28,7 @@ def init_app() -> Flask:
     from .v1 import v1
     from .v2 import v2
 
-    flask_app.register_blueprint(v1)
-    flask_app.register_blueprint(v2)
+    flask_app.register_blueprint(v1, url_prefix="/v1")
+    flask_app.register_blueprint(v2, url_prefix="/v2")
 
     return flask_app

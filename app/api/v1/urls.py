@@ -9,7 +9,7 @@ api = Api(v1, catch_all_404s=True)
 """
 Health
 """
-api.add_resource(resources.Health, "/", endpoint="healthcheck")
+api.add_resource(resources.Health, "", endpoint="healthcheck")
 
 """
 Taller 1
