@@ -1,1 +1,2 @@
-from .taller_1_controller import *
+from .entrega_final_controller import EntregaFinalController
+from .taller_1_controller import Taller1Controller

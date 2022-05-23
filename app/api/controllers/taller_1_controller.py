@@ -1,8 +1,9 @@
+import os
+
 import pandas as pd
 
 from app.core.helpers.controller import BaseController
 from app.core.helpers.query import query
-import os
 
 
 class Taller1Controller(BaseController):
@@ -17,7 +18,6 @@ class Taller1Controller(BaseController):
     kitchen_area: int
     object_type: int
 
-
     def handle_post(self):
         data = pd.DataFrame(
             {
@@ -30,7 +30,7 @@ class Taller1Controller(BaseController):
                 "rooms": self.rooms,
                 "area": self.area,
                 "kitchen_area": self.kitchen_area,
-                "object_type": self.object_type
+                "object_type": self.object_type,
             },
             index=[1],
         )

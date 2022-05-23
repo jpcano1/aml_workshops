@@ -16,7 +16,7 @@ class Health(Resource):
 
         ---
         tags:
-            - Health check
+          - v1
         responses:
             200:
                 description: Hello world!
@@ -46,7 +46,7 @@ class Taller1(Resource):
 
         ---
         tags:
-            - Talleres
+          - v1
         parameters:
           - in: body
             name: body
