@@ -38,3 +38,20 @@ class HoG:
             img = self.process_single_image(img)
             transformed_images.append(img)
         return transformed_images
+
+
+class LBP:
+    def __init__(self) -> None:
+        self.P = 8
+        self.R = 5
+
+    def process_single_image(self, img: np.ndarray) -> np.ndarray:
+        """
+        Process single image to get the LBP.
+
+        :param img: The image to be processed
+        :return: The LBP of the image processed
+        """
+        lbp_img = feature.local_binary_pattern(img, P=self.P, R=self.R)
+        n_bins = int(lbp_img.max() + 1)
+        return np.histogram(lbp_img, bins=n_bins, density=True, range=(0, n_bins))[0]

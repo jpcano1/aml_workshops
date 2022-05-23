@@ -9,7 +9,7 @@ from werkzeug.datastructures import FileStorage
 
 from app.core.helpers.controller import BaseController
 from app.core.helpers.exception import ControllerException
-from app.core.helpers.features import HoG
+from app.core.helpers.features import LBP
 
 
 class EntregaFinalController(BaseController):
@@ -38,8 +38,8 @@ class EntregaFinalController(BaseController):
         if len(img.shape) > 2:
             img = color.rgb2gray(img)
 
-        img_resized = cv2.resize(img, (100, 100), cv2.INTER_CUBIC)
-        hog = HoG()
+        img_resized = cv2.resize(img, (150, 150), cv2.INTER_CUBIC)
+        hog = LBP()
         img_features = hog.process_single_image(img_resized)
 
         prediction = self.model.predict([img_features])
