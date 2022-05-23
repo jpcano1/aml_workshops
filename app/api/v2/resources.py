@@ -41,12 +41,13 @@ class Prediction(Resource):
         ---
         tags:
           - v2
+        consumes:
+          - multipart/form-data
         parameters:
-          - name: image
-            required: true
-            schema:
-                type: file
-                example: image.png
+          - in: formData
+            name: image
+            type: file
+            description: The file to upload
         responses:
             200:
                 description: Here's your prediction
