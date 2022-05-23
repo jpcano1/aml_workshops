@@ -14,3 +14,13 @@ model = model_loader()
 Health
 """
 api.add_resource(resources.Health, "/", endpoint="healthcheck")
+
+"""
+Prediction
+"""
+api.add_resource(
+    resources.Prediction,
+    "/prediction",
+    endpoint="prediction",
+    resource_class_kwargs={"model": model},
+)

@@ -5,7 +5,7 @@ class BaseController:
     _kwargs: dict[str, Any]
     response: dict[str, Any]
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs):
         self._kwargs = kwargs
         self.response = {}
         self.__parse_kwargs()
